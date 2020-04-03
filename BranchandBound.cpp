@@ -1,9 +1,8 @@
-//greedy.cpp
+//BranhandBound.cpp
 //Author: Rahul Dev Kureel
 //Roll number:181210039
 //Branch: CSE 2nd year
-//A program which solves the fractional knapsack problem through Greedy Programming approach
-//Time complexity: O(nlogn) where n is the number of items
+//A program which solves the fractional knapsack problem through Branch and bound approach
 
 #include<iostream>
 #include<vector>
