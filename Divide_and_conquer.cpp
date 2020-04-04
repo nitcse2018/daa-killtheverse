@@ -2,72 +2,53 @@
 //Author: Rahul Dev Kureel
 //Roll number:181210039
 //Branch: CSE 2nd year
-//A program which when provided with an array outputs the sum of the maximum subarray
-//Time complexity: O(nlogn)
-//Though this problem can be solved in linear time using Kadane's algorithm, a Recursive approach has been used
-
+//A program which which solves the 0-1 knapsack problem using divide and conquer approach
+//Time complexity: O(2^n)
 
 #include<iostream>
-#include<climits>
+#include<vector>
 using namespace std;
-int max_crossing_array(int a[], int low,int mid, int high)
+
+int max(int a, int b)
 {
-    int i;
-    int sum=0,leftsum=INT_MIN ,rightsum=INT_MIN,left_index,right_index;
-    for(i=mid;i>=low;i--)
-    {
-        sum = sum + a[i];
-        if(sum>leftsum)
-        {
-            leftsum = sum;
-            left_index = i;
-        }
-    }
-    sum = 0;
-    for(i=mid+1;i<=high;i++)
-    {
-        sum = sum+a[i];
-        if(sum>rightsum)
-        {
-            rightsum = sum;
-            right_index = i;
-        }
-    }
-    return leftsum+rightsum;   
+    return (a>=b)?a:b;
 }
-int max_sub_array(int a[], int low, int high)
-{
-    if(high == low)
-    return a[low];
-    else
-    {
-        int mid = (low+high)/2;
-        int leftsum = max_sub_array(a,low,mid);
-        int rightsum = max_sub_array(a,mid+1,high);
-        int crosssum = max_crossing_array(a,low,mid,high);
-        if(leftsum>=rightsum&&leftsum>=crosssum)
-        return leftsum;
-        else if(rightsum>=leftsum&&rightsum>=crosssum)
-        return rightsum;
-        else
-        {
-            return crosssum;
-        }
-    }
-}
+
+int knapSack(int W, vector<int> wt, vector<int> val, int n)  
+{  
+      
+if (n == 0 || W == 0)  
+    return 0;  
+
+if (wt[n-1] > W)  
+    return knapSack(W, wt, val, n-1);  
+
+else return max( val[n-1] + knapSack(W-wt[n-1], wt, val, n-1),  
+                    knapSack(W, wt, val, n-1) );  
+} 
+
 int main()
 {
-    int n;
-    cout<<"\nEnter the number of elements:";
+    int n, W;
+    vector<int> v, wt;
+    cout<<"\nEnter the number of items:";
     cin>>n;
-    int i,*a = new int[n];
-    cout<<"\nEnter the elements:";
-    for(i=0;i<n;i++)
-    cin>>a[i];
-    cout<<"\nThe array is:\n";
-    for(i=0;i<n;i++)
-    cout<<a[i]<<" ";
-    cout<<"\nSum of elements of max sub array is:"<<max_sub_array(a,0,n-1)<<"\n";
-    system("pause");
+    cout<<"\nEnter the values of items:";
+    for(int i=0;i<n;i++)
+    {
+        int j;
+        cin>>j;
+        v.push_back(j);
+    }
+    cout<<"\nEnter the weights of items:";
+    for(int i=0;i<n;i++)
+    {
+        int j;
+        cin>>j;
+        wt.push_back(j);
+    }
+    cout<<"\nEnter the knapsack capacity:";
+    cin>>W;
+    cout<<"\nMaximum total value is:"<<knapSack(W, wt, v, n)<<"\n";
     return 0;
 }
