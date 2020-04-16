@@ -1,0 +1,10 @@
+NAME:Rahul Dev Kureel
+EMAIL:181210039@nitdelhi.ac.in
+CONTACT NUMBER:99999
+EDUCATION:B.Tech in Computer Science and Engineering from NIT Delhi
+EXPERIENCE:None
+PROJECTS:None
+SKILLS:Java
+EXTRA CURRICULAR ACTIVITIES:None
+
+---------------------------------------------------------------
